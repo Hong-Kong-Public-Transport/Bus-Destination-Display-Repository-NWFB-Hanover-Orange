@@ -38,5 +38,8 @@ jobs:
         uses: iarekylew00t/verified-bot-commit@main
         with:
           message: Update displays
-          files: display/*.png
+          files: |
+            display/*.png
+            index/*.json
+            cpp/*.h
           max-retries: 5
