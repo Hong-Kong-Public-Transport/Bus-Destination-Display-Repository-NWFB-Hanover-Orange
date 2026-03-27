@@ -33,10 +33,10 @@ jobs:
           java-version: 21
           distribution: 'zulu'
       - name: Run JAR
-        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "displays"
+        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "display"
       - name: Commit changes
         uses: iarekylew00t/verified-bot-commit@main
         with:
           message: Update displays
-          files: displays/*.png
+          files: display/*.png
           max-retries: 5
