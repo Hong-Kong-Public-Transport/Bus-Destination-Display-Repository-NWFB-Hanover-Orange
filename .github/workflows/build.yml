@@ -33,7 +33,7 @@ jobs:
           java-version: 21
           distribution: 'zulu'
       - name: Run JAR
-        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "display"
+        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "nwfb_hanover_orange" "display" "index" "cpp"
       - name: Commit changes
         uses: iarekylew00t/verified-bot-commit@main
         with:
