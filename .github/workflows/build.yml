@@ -33,13 +33,10 @@ jobs:
           java-version: 21
           distribution: 'zulu'
       - name: Run JAR
-        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "nwfb_hanover_orange" "display" "index" "cpp"
+        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "nwfb_hanover_orange" "display"
       - name: Commit changes
         uses: iarekylew00t/verified-bot-commit@main
         with:
           message: Update displays
-          files: |
-            display/*.png
-            index/*.json
-            cpp/*.h
+          files: display/**
           max-retries: 5
