@@ -35,11 +35,12 @@ jobs:
       - name: Run JAR
         run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "nwfb_hanover_orange" "display"
       - name: Stage changes
-        run: git add -A && git status
+        run: rm -r build && git add -A && git status
       - name: Commit changes
         uses: iarekylew00t/verified-bot-commit@main
         with:
           message: Update displays
-          files: display/**
+          files: |
+            **
           auto-stage: false
           max-retries: 5
