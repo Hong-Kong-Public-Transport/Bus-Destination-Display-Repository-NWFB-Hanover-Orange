@@ -1,7 +1,7 @@
 name: Build
 on:
   schedule:
-    - cron: "20 19 * * *" # 3:20am HKT
+    - cron: "0 19 * * *"
   workflow_dispatch:
 
 permissions:
@@ -20,8 +20,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Generate Token
+        id: generate-token
+        uses: actions/create-github-app-token@main
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Checkout repository
         uses: actions/checkout@main
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
       - name: Download JAR
         uses: actions/download-artifact@main
         with:
@@ -34,13 +42,16 @@ jobs:
           distribution: 'zulu'
       - name: Run JAR
         run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "nwfb_hanover_orange" "display"
-      - name: Stage changes
-        run: rm -r build && git add -A && git status
-      - name: Commit changes
-        uses: iarekylew00t/verified-bot-commit@main
-        with:
-          message: Update displays
-          files: |
-            **
-          auto-stage: false
-          max-retries: 5
+      - name: Commit and push
+        shell: bash
+        run: |
+          git config user.name "${{ steps.generate-token.outputs.app-slug }}[bot]"
+          git config user.email "${{ steps.generate-token.outputs.app-slug }}[bot]@users.noreply.github.com"
+          git add -A
+          git reset build/**
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Update displays"
+          git push
