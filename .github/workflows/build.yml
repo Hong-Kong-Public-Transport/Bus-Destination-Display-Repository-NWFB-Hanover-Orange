@@ -35,7 +35,7 @@ jobs:
       - name: Run JAR
         run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "nwfb_hanover_orange" "display"
       - name: Stage changes
-        run: git add -A
+        run: git add -A && git status && rm -r build
       - name: Commit changes
         uses: iarekylew00t/verified-bot-commit@main
         with:
