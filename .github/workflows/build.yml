@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-java@main
         with:
           java-version: 21
-          distribution: 'zulu'
+          distribution: 'microsoft'
       - name: Run JAR
         run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "display"
       - name: Commit and push
