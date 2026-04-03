@@ -40,13 +40,8 @@ jobs:
         with:
           java-version: 21
           distribution: 'microsoft'
-      - name: Install OpenCV libraries
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev
-          sudo ldconfig
       - name: Run JAR
-        run: java -jar build/libs/Bus-Destination-Display-Processor-0.0.1-all.jar "${{ secrets.BASE_URL }}" "display"
+        run: java -Dorg.bytedeco.javacpp.cachedir=/tmp/javacpp -jar build/libs/Bus-Destination-Display-Processor-0.0.1-all.jar "${{ secrets.BASE_URL }}" "display"
       - name: Commit and push
         shell: bash
         run: |
