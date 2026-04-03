@@ -41,7 +41,7 @@ jobs:
           java-version: 21
           distribution: 'microsoft'
       - name: Run JAR
-        run: java -Dorg.bytedeco.javacpp.cachedir=/tmp/javacpp -jar build/libs/Bus-Destination-Display-Processor-0.0.1-all.jar "${{ secrets.BASE_URL }}" "display"
+        run: java -Dorg.bytedeco.javacpp.cachedir=tmp/javacpp -jar build/libs/Bus-Destination-Display-Processor-0.0.1-all.jar "${{ secrets.BASE_URL }}" "display"
       - name: Commit and push
         shell: bash
         run: |
