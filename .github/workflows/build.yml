@@ -39,9 +39,9 @@ jobs:
         uses: actions/setup-java@main
         with:
           java-version: 21
-          distribution: 'microsoft'
+          distribution: 'zulu'
       - name: Run JAR
-        run: java -Dorg.bytedeco.javacpp.cachedir=tmp/javacpp -jar build/libs/Bus-Destination-Display-Processor-0.0.1-all.jar "${{ secrets.BASE_URL }}" "display"
+        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "display"
       - name: Commit and push
         shell: bash
         run: |
