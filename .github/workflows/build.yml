@@ -41,7 +41,7 @@ jobs:
           java-version: 21
           distribution: 'microsoft'
       - name: Install OpenCV libraries
-        run: choco install opencv -y
+        run: sudo apt-get update && sudo apt-get install -y libopencv-dev
       - name: Run JAR
         run: java -jar build/libs/Bus-Destination-Display-Processor-0.0.1-all.jar "${{ secrets.BASE_URL }}" "display"
       - name: Commit and push
