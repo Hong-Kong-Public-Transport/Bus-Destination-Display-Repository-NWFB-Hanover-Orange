@@ -41,7 +41,7 @@ jobs:
           java-version: 21
           distribution: 'microsoft'
       - name: Run JAR
-        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar "${{ secrets.BASE_URL }}" "display"
+        run: java -jar build/libs/Bus-Destination-Display-Processor-0.0.1-all.jar "${{ secrets.BASE_URL }}" "display"
       - name: Commit and push
         shell: bash
         run: |
