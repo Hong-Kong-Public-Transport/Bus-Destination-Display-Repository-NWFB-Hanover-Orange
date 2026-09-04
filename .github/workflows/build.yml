@@ -43,7 +43,7 @@ jobs:
       - name: Run JAR
         env:
           URLS: ${{ secrets.URLS }}
-        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar -o display "$URLS"
+        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar -o display $URLS
       - name: Commit and push
         shell: bash
         run: |
