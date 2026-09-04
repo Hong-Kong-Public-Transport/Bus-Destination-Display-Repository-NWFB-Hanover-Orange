@@ -41,7 +41,9 @@ jobs:
           java-version: 21
           distribution: 'zulu'
       - name: Run JAR
-        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar -o display ${{ secrets.URLS }}
+        env:
+          URLS: ${{ secrets.URLS }}
+        run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar -o display "$URLS"
       - name: Commit and push
         shell: bash
         run: |
