@@ -45,7 +45,8 @@ jobs:
           URLS: ${{ secrets.URLS }}
         run: java -jar build/libs/Bus-Destination-Display-Processor-*-all.jar -o display $URLS
       - name: Commit and push
-        shell: bash
+        env:
+          TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           git config user.name "${{ steps.generate-token.outputs.app-slug }}[bot]"
           git config user.email "${{ steps.generate-token.outputs.app-slug }}[bot]@users.noreply.github.com"
@@ -56,4 +57,5 @@ jobs:
             exit 0
           fi
           git commit -m "Update displays"
-          git push
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git
+          git push origin HEAD:master
